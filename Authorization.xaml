@@ -1,0 +1,35 @@
+﻿<Page x:Class="MusicSmth.Authorization"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MusicSmth"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1360"
+      Title="Authorization">
+
+    <Grid Background="#1DB954">
+        <Image Source="Doggie.jpg" Stretch="Fill" Opacity="0.1"></Image>
+        <StackPanel HorizontalAlignment="Center" Margin="0,50,0,0" Orientation="Vertical">
+            <TextBlock FontSize="36">ВХОД</TextBlock>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="150">
+            <TextBlock FontSize="20"  HorizontalAlignment="Center">Логин</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <TextBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Login" Background="#0000" BorderBrush="#0000" Height="25"></TextBox>
+            </Border>
+            <TextBlock FontSize="20" HorizontalAlignment="Center">Пароль</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <PasswordBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Pass" Background="#0000" BorderBrush="#0000" Height="25"/>
+            </Border>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,95">
+            <Border Background="Black" CornerRadius="10" Width="150" Height="30">
+                <Button Height="23" Name="Enter" Foreground="White" Background="#0000" BorderBrush="#0000">ВОЙТИ</Button>
+            </Border>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,70" HorizontalAlignment="Center">
+            <Button Name="GoReg" Click="GoReg_Click" BorderBrush="#0000" Background="#0000" FontWeight="DemiBold" FontSize="14">Нет аккаунта? Зарегистрируйтесь</Button>
+        </StackPanel>
+    </Grid>
+</Page>
