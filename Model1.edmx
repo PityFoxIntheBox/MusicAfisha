@@ -5,6 +5,35 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bands">
+          <Key>
+            <PropertyRef Name="ID_Band" />
+          </Key>
+          <Property Name="ID_Band" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Band" Type="varchar" MaxLength="255" />
+          <Property Name="Discription" Type="varchar" MaxLength="255" />
+          <Property Name="ID_Genre" Type="int" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID_City" />
+          </Key>
+          <Property Name="ID_City" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Concerts">
+          <Key>
+            <PropertyRef Name="ID_Concert" />
+          </Key>
+          <Property Name="ID_Concert" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="ID_Band" Type="int" />
+          <Property Name="Discription" Type="varchar" MaxLength="255" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ID_Place" Type="int" />
+          <Property Name="Lowest_Price" Type="money" />
+          <Property Name="Highest_Price" Type="money" />
+        </EntityType>
         <EntityType Name="Genders">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,12 +41,35 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="ID_Genre" />
+          </Key>
+          <Property Name="ID_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Genre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Place" Type="varchar" MaxLength="255" />
+          <Property Name="ID_City" Type="int" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tracked_Concerts">
+          <Key>
+            <PropertyRef Name="ID_Track" />
+          </Key>
+          <Property Name="ID_Track" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="ID_Concert" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -33,6 +85,78 @@
           <Property Name="BirthDate" Type="date" />
           <Property Name="Role" Type="int" />
         </EntityType>
+        <Association Name="FK__Bands__ID_Genre__68487DD7">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Bands" Type="Self.Bands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="ID_Genre" />
+            </Principal>
+            <Dependent Role="Bands">
+              <PropertyRef Name="ID_Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Concerts__ID_Ban__66603565">
+          <End Role="Bands" Type="Self.Bands" Multiplicity="0..1" />
+          <End Role="Concerts" Type="Self.Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bands">
+              <PropertyRef Name="ID_Band" />
+            </Principal>
+            <Dependent Role="Concerts">
+              <PropertyRef Name="ID_Band" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Concerts__ID_Pla__6754599E">
+          <End Role="Places" Type="Self.Places" Multiplicity="0..1" />
+          <End Role="Concerts" Type="Self.Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="Concerts">
+              <PropertyRef Name="ID_Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Places__ID_City__693CA210">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID_City" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="ID_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracked_C__ID_Co__6A30C649">
+          <End Role="Concerts" Type="Self.Concerts" Multiplicity="0..1" />
+          <End Role="Tracked_Concerts" Type="Self.Tracked_Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concerts">
+              <PropertyRef Name="ID_Concert" />
+            </Principal>
+            <Dependent Role="Tracked_Concerts">
+              <PropertyRef Name="ID_Concert" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracked_C__ID_Us__6B24EA82">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tracked_Concerts" Type="Self.Tracked_Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracked_Concerts">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Genders">
           <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -58,9 +182,39 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Bands" EntityType="Self.Bands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Concerts" EntityType="Self.Concerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tracked_Concerts" EntityType="Self.Tracked_Concerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bands__ID_Genre__68487DD7" Association="Self.FK__Bands__ID_Genre__68487DD7">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Bands" EntitySet="Bands" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Concerts__ID_Ban__66603565" Association="Self.FK__Concerts__ID_Ban__66603565">
+            <End Role="Bands" EntitySet="Bands" />
+            <End Role="Concerts" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Concerts__ID_Pla__6754599E" Association="Self.FK__Concerts__ID_Pla__6754599E">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Concerts" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Places__ID_City__693CA210" Association="Self.FK__Places__ID_City__693CA210">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracked_C__ID_Co__6A30C649" Association="Self.FK__Tracked_C__ID_Co__6A30C649">
+            <End Role="Concerts" EntitySet="Concerts" />
+            <End Role="Tracked_Concerts" EntitySet="Tracked_Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracked_C__ID_Us__6B24EA82" Association="Self.FK__Tracked_C__ID_Us__6B24EA82">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tracked_Concerts" EntitySet="Tracked_Concerts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_Genders" Association="Self.FK_Users_Genders">
             <End Role="Genders" EntitySet="Genders" />
             <End Role="Users" EntitySet="Users" />
@@ -105,6 +259,7 @@
           <Property Name="Role" Type="Int32" />
           <NavigationProperty Name="Genders" Relationship="Self.FK_Users_Genders" FromRole="Users" ToRole="Genders" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Tracked_Concerts" Relationship="Model.FK__Tracked_C__ID_Us__6B24EA82" FromRole="Users" ToRole="Tracked_Concerts" />
         </EntityType>
         <Association Name="FK_Users_Genders">
           <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
@@ -142,7 +297,172 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Bands" EntityType="Model.Bands" />
+          <EntitySet Name="Cities" EntityType="Model.Cities" />
+          <EntitySet Name="Concerts" EntityType="Model.Concerts" />
+          <EntitySet Name="Genres" EntityType="Model.Genres" />
+          <EntitySet Name="Places" EntityType="Model.Places" />
+          <EntitySet Name="Tracked_Concerts" EntityType="Model.Tracked_Concerts" />
+          <AssociationSet Name="FK__Bands__ID_Genre__68487DD7" Association="Model.FK__Bands__ID_Genre__68487DD7">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Bands" EntitySet="Bands" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Concerts__ID_Ban__66603565" Association="Model.FK__Concerts__ID_Ban__66603565">
+            <End Role="Bands" EntitySet="Bands" />
+            <End Role="Concerts" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Places__ID_City__693CA210" Association="Model.FK__Places__ID_City__693CA210">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Concerts__ID_Pla__6754599E" Association="Model.FK__Concerts__ID_Pla__6754599E">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Concerts" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracked_C__ID_Co__6A30C649" Association="Model.FK__Tracked_C__ID_Co__6A30C649">
+            <End Role="Concerts" EntitySet="Concerts" />
+            <End Role="Tracked_Concerts" EntitySet="Tracked_Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracked_C__ID_Us__6B24EA82" Association="Model.FK__Tracked_C__ID_Us__6B24EA82">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tracked_Concerts" EntitySet="Tracked_Concerts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bands">
+          <Key>
+            <PropertyRef Name="ID_Band" />
+          </Key>
+          <Property Name="ID_Band" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Band" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Discription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Genre" Type="Int32" />
+          <NavigationProperty Name="Genres" Relationship="Model.FK__Bands__ID_Genre__68487DD7" FromRole="Bands" ToRole="Genres" />
+          <NavigationProperty Name="Concerts" Relationship="Model.FK__Concerts__ID_Ban__66603565" FromRole="Bands" ToRole="Concerts" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID_City" />
+          </Key>
+          <Property Name="ID_City" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Places" Relationship="Model.FK__Places__ID_City__693CA210" FromRole="Cities" ToRole="Places" />
+        </EntityType>
+        <EntityType Name="Concerts">
+          <Key>
+            <PropertyRef Name="ID_Concert" />
+          </Key>
+          <Property Name="ID_Concert" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Band" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ID_Place" Type="Int32" />
+          <Property Name="Lowest_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Highest_Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Bands" Relationship="Model.FK__Concerts__ID_Ban__66603565" FromRole="Concerts" ToRole="Bands" />
+          <NavigationProperty Name="Places" Relationship="Model.FK__Concerts__ID_Pla__6754599E" FromRole="Concerts" ToRole="Places" />
+          <NavigationProperty Name="Tracked_Concerts" Relationship="Model.FK__Tracked_C__ID_Co__6A30C649" FromRole="Concerts" ToRole="Tracked_Concerts" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="ID_Genre" />
+          </Key>
+          <Property Name="ID_Genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Genre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bands" Relationship="Model.FK__Bands__ID_Genre__68487DD7" FromRole="Genres" ToRole="Bands" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Place" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_City" Type="Int32" />
+          <NavigationProperty Name="Cities" Relationship="Model.FK__Places__ID_City__693CA210" FromRole="Places" ToRole="Cities" />
+          <NavigationProperty Name="Concerts" Relationship="Model.FK__Concerts__ID_Pla__6754599E" FromRole="Places" ToRole="Concerts" />
+        </EntityType>
+        <EntityType Name="Tracked_Concerts">
+          <Key>
+            <PropertyRef Name="ID_Track" />
+          </Key>
+          <Property Name="ID_Track" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="ID_Concert" Type="Int32" />
+          <NavigationProperty Name="Concerts" Relationship="Model.FK__Tracked_C__ID_Co__6A30C649" FromRole="Tracked_Concerts" ToRole="Concerts" />
+          <NavigationProperty Name="Users" Relationship="Model.FK__Tracked_C__ID_Us__6B24EA82" FromRole="Tracked_Concerts" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK__Bands__ID_Genre__68487DD7">
+          <End Type="Model.Genres" Role="Genres" Multiplicity="0..1" />
+          <End Type="Model.Bands" Role="Bands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="ID_Genre" />
+            </Principal>
+            <Dependent Role="Bands">
+              <PropertyRef Name="ID_Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Concerts__ID_Ban__66603565">
+          <End Type="Model.Bands" Role="Bands" Multiplicity="0..1" />
+          <End Type="Model.Concerts" Role="Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bands">
+              <PropertyRef Name="ID_Band" />
+            </Principal>
+            <Dependent Role="Concerts">
+              <PropertyRef Name="ID_Band" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Places__ID_City__693CA210">
+          <End Type="Model.Cities" Role="Cities" Multiplicity="0..1" />
+          <End Type="Model.Places" Role="Places" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID_City" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="ID_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Concerts__ID_Pla__6754599E">
+          <End Type="Model.Places" Role="Places" Multiplicity="0..1" />
+          <End Type="Model.Concerts" Role="Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="Concerts">
+              <PropertyRef Name="ID_Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracked_C__ID_Co__6A30C649">
+          <End Type="Model.Concerts" Role="Concerts" Multiplicity="0..1" />
+          <End Type="Model.Tracked_Concerts" Role="Tracked_Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concerts">
+              <PropertyRef Name="ID_Concert" />
+            </Principal>
+            <Dependent Role="Tracked_Concerts">
+              <PropertyRef Name="ID_Concert" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracked_C__ID_Us__6B24EA82">
+          <End Type="Model.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="Model.Tracked_Concerts" Role="Tracked_Concerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tracked_Concerts">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -177,6 +497,64 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bands">
+            <EntityTypeMapping TypeName="Model.Bands">
+              <MappingFragment StoreEntitySet="Bands">
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Band" ColumnName="Band" />
+                <ScalarProperty Name="ID_Band" ColumnName="ID_Band" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="Model.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ID_City" ColumnName="ID_City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concerts">
+            <EntityTypeMapping TypeName="Model.Concerts">
+              <MappingFragment StoreEntitySet="Concerts">
+                <ScalarProperty Name="Highest_Price" ColumnName="Highest_Price" />
+                <ScalarProperty Name="Lowest_Price" ColumnName="Lowest_Price" />
+                <ScalarProperty Name="ID_Place" ColumnName="ID_Place" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="ID_Band" ColumnName="ID_Band" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_Concert" ColumnName="ID_Concert" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="Model.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="Model.Places">
+              <MappingFragment StoreEntitySet="Places">
+                <ScalarProperty Name="ID_City" ColumnName="ID_City" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="ID_Place" ColumnName="ID_Place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tracked_Concerts">
+            <EntityTypeMapping TypeName="Model.Tracked_Concerts">
+              <MappingFragment StoreEntitySet="Tracked_Concerts">
+                <ScalarProperty Name="ID_Concert" ColumnName="ID_Concert" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Track" ColumnName="ID_Track" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

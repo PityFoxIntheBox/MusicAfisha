@@ -4,12 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c2f80dcb1d54de7a3b4ab2b27429a8c" Name="Diagram1">
+      <Diagram DiagramId="2c2f80dcb1d54de7a3b4ab2b27429a8c" Name="Diagram1" ZoomLevel="117">
         <EntityTypeShape EntityType="Model.Genders" Width="1.5" PointX="2.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Roles" Width="1.5" PointX="2.5" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="6.625" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Users_Genders" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Users_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Bands" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="Model.Cities" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.Concerts" Width="1.5" PointX="6.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.Genres" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Places" Width="1.5" PointX="3" PointY="10.5" />
+        <EntityTypeShape EntityType="Model.Tracked_Concerts" Width="1.5" PointX="9.25" PointY="5.375" />
+        <AssociationConnector Association="Model.FK__Bands__ID_Genre__68487DD7" />
+        <AssociationConnector Association="Model.FK__Concerts__ID_Ban__66603565" />
+        <AssociationConnector Association="Model.FK__Places__ID_City__693CA210" />
+        <AssociationConnector Association="Model.FK__Concerts__ID_Pla__6754599E" />
+        <AssociationConnector Association="Model.FK__Tracked_C__ID_Co__6A30C649" />
+        <AssociationConnector Association="Model.FK__Tracked_C__ID_Us__6B24EA82" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

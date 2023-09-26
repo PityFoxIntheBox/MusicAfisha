@@ -235,7 +235,7 @@
     <Grid Background="#1DB954">
         <Image Source="Doggie.jpg" Stretch="Fill" Opacity="0.1"></Image>
         <StackPanel HorizontalAlignment="Center" Margin="0,50,0,0" Orientation="Vertical">
-            <TextBlock FontSize="36">ВХОД</TextBlock>
+            <TextBlock FontSize="36">РЕГИСТРАЦИЯ</TextBlock>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
                 <TextBlock FontSize="20" HorizontalAlignment="Center">Логин</TextBlock>
