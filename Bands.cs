@@ -12,27 +12,21 @@ namespace MusicSmth
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Bands
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Bands()
         {
-            this.Tracked_Concerts = new HashSet<Tracked_Concerts>();
+            this.Concerts = new HashSet<Concerts>();
         }
     
-        public int Id { get; set; }
-        public string Surname { get; set; }
-        public string Name { get; set; }
-        public string Patronymic { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> Gender { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public Nullable<int> Role { get; set; }
+        public int ID_Band { get; set; }
+        public string Band { get; set; }
+        public string Discription { get; set; }
+        public Nullable<int> ID_Genre { get; set; }
     
-        public virtual Genders Genders { get; set; }
-        public virtual Roles Roles { get; set; }
+        public virtual Genres Genres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tracked_Concerts> Tracked_Concerts { get; set; }
+        public virtual ICollection<Concerts> Concerts { get; set; }
     }
 }

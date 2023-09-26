@@ -28,5 +28,11 @@ namespace MusicSmth
         public virtual DbSet<Genders> Genders { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Bands> Bands { get; set; }
+        public virtual DbSet<Cities> Cities { get; set; }
+        public virtual DbSet<Concerts> Concerts { get; set; }
+        public virtual DbSet<Genres> Genres { get; set; }
+        public virtual DbSet<Places> Places { get; set; }
+        public virtual DbSet<Tracked_Concerts> Tracked_Concerts { get; set; }
     }
 }
