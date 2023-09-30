@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -37,7 +38,29 @@ namespace MusicSmth
             {
                 CurPass = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurPass))).Replace("-", "");
             }
-
+            using (Music DB = new Music())
+            {
+                Users user = DB.Users.FirstOrDefault(x => x.Login == Login.Text && x.Password == CurPass);
+                if (user != null)
+                {
+                    switch (user.Role)
+                    {
+                        case 1:
+                            MainFrame.mframe.Navigate(new AdminPage());
+                            break;
+                        case 2:
+                            MainFrame.mframe.Navigate(new UserPage());
+                            break;
+                        default:
+                            MessageBox.Show("Вас не существует");
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Вас не существует");
+                }
+            }
         }
     }
 }
