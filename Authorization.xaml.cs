@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,16 @@ namespace MusicSmth
         public void GoReg_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.mframe.Navigate(new Registration());
+        }
+
+        private void Enter_Click(object sender, RoutedEventArgs e)
+        {
+            string CurPass = Pass.Password;
+            using (SHA256 hash = SHA256.Create())
+            {
+                CurPass = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurPass))).Replace("-", "");
+            }
+
         }
     }
 }
