@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace MusicSmth
 {
     /// <summary>
-    /// Логика взаимодействия для AdminPage.xaml
+    /// Логика взаимодействия для UsersData.xaml
     /// </summary>
-    public partial class AdminPage : Page
+    public partial class UsersData : Page
     {
-        public AdminPage()
+        public UsersData()
         {
             InitializeComponent();
-        }
+            using(Music DB = new Music())
+            {
 
-        private void DataView(object sender, RoutedEventArgs e)
-        {
-            MainFrame.mframe.Navigate(new UsersData());
+                Data.ItemsSource = DB.Users.ToList();
+            }
         }
     }
 }
