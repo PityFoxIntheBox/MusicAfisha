@@ -35,6 +35,11 @@ namespace MusicSmth
         private void Reg_Click(object sender, RoutedEventArgs e)
         {
             string CurPass = Pass.Password;
+            if(PassCheck(CurPass)==false) 
+            {
+                MessageBox.Show("В пароле должно быть: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец. символа. Общая длина пароля не менее 8 символов");
+                return;
+            }
             using (SHA256 hash = SHA256.Create())
             {
                 CurPass = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurPass))).Replace("-", "");
@@ -69,10 +74,24 @@ namespace MusicSmth
                 DB.Users.Add(user);
                 DB.SaveChanges();
             }
-            MessageBox.Show("Норм");
+            MessageBox.Show("Регистрация прошла успешно");
         }
-        public void PassCheck(string Pass)
+        public bool PassCheck(string Pass)
         {
+            Regex check = new Regex("(?=.*[A-Z])(?=.*[a-z]){3,}(?=.*[0-9]){2,}(?=.*[_])[A-Za-z0-9_]{8,}");
+            if(check.IsMatch(Pass)==true)
+            {
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
