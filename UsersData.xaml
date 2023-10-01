@@ -40,10 +40,10 @@
             </StackPanel>
             <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center">Введите поиск (по фамилии или имени)</TextBlock>
             <Border Style="{DynamicResource BorderInput}" Height="20" Width="180" Margin="0,5,0,0">
-                <TextBox Margin="0,10,0,0" Style="{DynamicResource InputDefault}" Name="Search"/>
+                <TextBox  Style="{DynamicResource InputDefault}" Name="SearchString"/>
             </Border>
             <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0" Height="20">
-                <Button Style="{DynamicResource ButtonDefault}">Искать</Button>
+                <Button Style="{DynamicResource ButtonDefault}" Click="Search">Искать</Button>
             </Border>
         </StackPanel>
     </Grid>

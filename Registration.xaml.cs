@@ -34,12 +34,26 @@ namespace MusicSmth
 
         private void Reg_Click(object sender, RoutedEventArgs e)
         {
+            if(EmptyCheck(Surname.Text,Name.Text,Patronymic.Text,BirthDate.Text))
+            {
+                MessageBox.Show("Нужно заполнить поля ФИО и даты рождения, иначе не работает");
+                return;
+            }
+
+            if(LogCheck(Login.Text)==false)
+            {
+                MessageBox.Show("Такой логин уже существует :'(");
+                return;
+            }
+
             string CurPass = Pass.Password;
+
             if(PassCheck(CurPass)==false) 
             {
                 MessageBox.Show("В пароле должно быть: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец. символа. Общая длина пароля не менее 8 символов");
                 return;
             }
+
             using (SHA256 hash = SHA256.Create())
             {
                 CurPass = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(CurPass))).Replace("-", "");
@@ -86,6 +100,31 @@ namespace MusicSmth
             else 
             { 
                 return false; 
+            }
+        }
+        public bool LogCheck(string Log)
+        {
+            using (Music DB = new Music())
+            {
+                foreach(Users user in DB.Users)
+                {
+                    if(Log == user.Login)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        public bool EmptyCheck(string Sur, string Nam, string Pat, string BirthDate)
+        {
+            if(Sur == null || Nam == null || Pat == null || BirthDate == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

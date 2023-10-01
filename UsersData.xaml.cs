@@ -116,5 +116,25 @@ namespace MusicSmth
                 Data.ItemsSource = u;
             }
         }
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            using (Music DB = new Music())
+            {
+                string SeText = SearchString.Text;
+                List <Users> u = DB.Users.Where(x=>x.Surname.StartsWith(SeText) || x.Name.StartsWith(SeText)).ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
+            }
+        }
     }
 }
