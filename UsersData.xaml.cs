@@ -23,10 +23,97 @@ namespace MusicSmth
         public UsersData()
         {
             InitializeComponent();
-            using(Music DB = new Music())
+            using (Music DB = new Music())
             {
-
-                Data.ItemsSource = DB.Users.ToList();
+                List<Users> u = DB.Users.ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
+            }
+        }
+        private void SortAZ(object sender, RoutedEventArgs e)
+        {
+            using (Music DB = new Music())
+            {
+                List<Users> u = DB.Users.OrderBy(x=>x.Surname).ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
+            }
+        }
+        private void SortZA(object sender, RoutedEventArgs e)
+        {
+            using (Music DB = new Music())
+            {
+                List<Users> u = DB.Users.OrderByDescending(x => x.Surname).ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
+            }
+        }
+        private void FindM(object sender, RoutedEventArgs e)
+        {
+            using (Music DB = new Music())
+            {
+                List<Users> u = DB.Users.Where(x=>x.Gender==1).ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
+            }
+        }
+        private void FindW(object sender, RoutedEventArgs e)
+        {
+            using (Music DB = new Music())
+            {
+                List<Users> u = DB.Users.Where(x => x.Gender == 2).ToList();
+                foreach (Users us in u)
+                {
+                    if (us.Gender == 1)
+                    {
+                        us.Genders.Gender = "Мужской";
+                    }
+                    else
+                    {
+                        us.Genders.Gender = "Женский";
+                    }
+                }
+                Data.ItemsSource = u;
             }
         }
     }

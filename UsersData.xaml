@@ -9,15 +9,42 @@
       Title="UsersData">
 
     <Grid Background="#1DB954">
-        <DataGrid Background="#1DB954" x:Name="Data" CanUserAddRows="False" AutoGenerateColumns="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid ColumnHeaderStyle="{DynamicResource HeadDefault}"  Grid.Row="0" Background="#1DB954" x:Name="Data" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" RowBackground="Black" Foreground="White">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding Path=Surname}"/>
                 <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding Path=Patronymic}"/>
                 <DataGridTextColumn Header="Пол" Width="*" Binding="{Binding Path=Genders.Gender}"/>
                 <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding Path=Login}"/>
-                <DataGridTextColumn Header="Дата рождения" Width="*" Binding="{Binding Path=BirthDate}"/>
+                <DataGridTextColumn Header="Дата рождения" Width="*" Binding="{Binding Path=BirthDate , StringFormat=\{0:dd.MM.yyyy\}}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="1">
+            <Border Style="{DynamicResource BorderDefault}" Width="180" Margin="0,50,0,0">
+                <Button Style="{DynamicResource ButtonDefault}" Click="SortAZ">Сортировка А-Я по фамилии</Button>
+            </Border>
+            <Border Style="{DynamicResource BorderDefault}" Width="180" Margin="0,10,0,0">
+                <Button Style="{DynamicResource ButtonDefault}" Click="SortZA">Сортировка Я-А по фамилии</Button>
+            </Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0">
+                    <Button Style="{DynamicResource ButtonDefault}" Click="FindM">Найти М</Button>
+                </Border>
+                <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0">
+                    <Button Style="{DynamicResource ButtonDefault}" Click="FindW">Найти Ж</Button>
+                </Border>
+            </StackPanel>
+            <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center">Введите поиск (по фамилии или имени)</TextBlock>
+            <Border Style="{DynamicResource BorderInput}" Height="20" Width="180" Margin="0,5,0,0">
+                <TextBox Margin="0,10,0,0" Style="{DynamicResource InputDefault}" Name="Search"/>
+            </Border>
+            <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0" Height="20">
+                <Button Style="{DynamicResource ButtonDefault}">Искать</Button>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>
