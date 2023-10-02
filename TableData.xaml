@@ -10,7 +10,7 @@
 
     <Grid Background="#1DB954">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ListView BorderThickness="0" Background="#1DB954" Name="ConcertData" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
