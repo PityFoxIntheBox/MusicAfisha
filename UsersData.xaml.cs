@@ -136,5 +136,9 @@ namespace MusicSmth
                 Data.ItemsSource = u;
             }
         }
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            MainFrame.mframe.Navigate(new AdminPage());
+        }
     }
 }

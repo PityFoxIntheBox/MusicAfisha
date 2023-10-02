@@ -13,7 +13,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid ColumnHeaderStyle="{DynamicResource HeadDefault}"  Grid.Row="0" Background="#1DB954" x:Name="Data" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" RowBackground="Black" Foreground="White">
+        <DataGrid BorderThickness="0" ColumnHeaderStyle="{DynamicResource HeadDefault}"  Grid.Row="0" Background="#1DB954" x:Name="Data" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalAlignment="Center" RowBackground="Black" Foreground="White">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding Path=Surname}"/>
@@ -31,7 +31,7 @@
                 <Button Style="{DynamicResource ButtonDefault}" Click="SortZA">Сортировка Я-А по фамилии</Button>
             </Border>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0">
+                <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,5,0">
                     <Button Style="{DynamicResource ButtonDefault}" Click="FindM">Найти М</Button>
                 </Border>
                 <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0">
@@ -44,6 +44,11 @@
             </Border>
             <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0" Height="20">
                 <Button Style="{DynamicResource ButtonDefault}" Click="Search">Искать</Button>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10">
+            <Border Style="{DynamicResource BorderDefault}" Width="90" Height="20">
+                <Button Style="{DynamicResource ButtonDefault}" Click="Back">Назад</Button>
             </Border>
         </StackPanel>
     </Grid>

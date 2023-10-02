@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace MusicSmth
 {
     /// <summary>
-    /// Логика взаимодействия для AdminPage.xaml
+    /// Логика взаимодействия для TableData.xaml
     /// </summary>
-    public partial class AdminPage : Page
+    public partial class TableData : Page
     {
-        public AdminPage()
+        public TableData()
         {
             InitializeComponent();
-        }
-
-        private void DataView(object sender, RoutedEventArgs e)
-        {
-            MainFrame.mframe.Navigate(new UsersData());
-        }
-
-        private void TableView(object sender, RoutedEventArgs e)
-        {
-            MainFrame.mframe.Navigate(new TableData());
         }
     }
 }
