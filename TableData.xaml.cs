@@ -24,5 +24,9 @@ namespace MusicSmth
         {
             InitializeComponent();
         }
+        public void Back(object sender, EventArgs e)
+        {
+            MainFrame.mframe.Navigate(new AdminPage());
+        }
     }
 }
