@@ -7,6 +7,37 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UsersData">
+    <Page.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <ControlTemplate x:Key="TextBoxTemplate1" TargetType="{x:Type TextBoxBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid Background="#1DB954">
         <Grid.RowDefinitions>
@@ -25,30 +56,30 @@
         </DataGrid>
         <StackPanel Grid.Row="1">
             <Border Style="{DynamicResource BorderDefault}" Width="180" Margin="0,50,0,0">
-                <Button Style="{DynamicResource ButtonDefault}" Click="SortAZ">Сортировка А-Я по фамилии</Button>
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="SortAZ">Сортировка А-Я по фамилии</Button>
             </Border>
             <Border Style="{DynamicResource BorderDefault}" Width="180" Margin="0,10,0,0">
-                <Button Style="{DynamicResource ButtonDefault}" Click="SortZA">Сортировка Я-А по фамилии</Button>
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="SortZA">Сортировка Я-А по фамилии</Button>
             </Border>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,5,0">
-                    <Button Style="{DynamicResource ButtonDefault}" Click="FindM">Найти М</Button>
+                    <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="FindM">Найти М</Button>
                 </Border>
                 <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0">
-                    <Button Style="{DynamicResource ButtonDefault}" Click="FindW">Найти Ж</Button>
+                    <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="FindW">Найти Ж</Button>
                 </Border>
             </StackPanel>
             <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center">Введите поиск (по фамилии или имени)</TextBlock>
             <Border Style="{DynamicResource BorderInput}" Height="20" Width="180" Margin="0,5,0,0">
-                <TextBox  Style="{DynamicResource InputDefault}" Name="SearchString"/>
+                <TextBox Template="{DynamicResource TextBoxTemplate1}"  Style="{DynamicResource InputDefault}" Name="SearchString"/>
             </Border>
             <Border Style="{DynamicResource BorderDefault}" Width="90" Margin="0,10,0,0" Height="20">
-                <Button Style="{DynamicResource ButtonDefault}" Click="Search">Искать</Button>
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="Search">Искать</Button>
             </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10">
             <Border Style="{DynamicResource BorderDefault}" Width="90" Height="20">
-                <Button Style="{DynamicResource ButtonDefault}" Click="Back">Назад</Button>
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="Back">Назад</Button>
             </Border>
         </StackPanel>
     </Grid>
