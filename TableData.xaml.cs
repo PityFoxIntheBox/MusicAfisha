@@ -23,7 +23,41 @@ namespace MusicSmth
         public TableData()
         {
             InitializeComponent();
+            Music DB = new Music();
+            ConcertData.ItemsSource = DB.Concerts.ToList();
+            
         }
+
+        public void FindCity(object sender,  RoutedEventArgs e)
+        {
+            TextBlock city = (TextBlock)sender;
+            int index = Convert.ToInt32(city.Uid);
+            Music DB = new Music();
+            string c = DB.Cities.Where(x=>x.ID_City == index).Select(x=>x.City).First();
+            city.Text = c;
+        }
+        
+
+        private void CountTracked(object sender, RoutedEventArgs e)
+        {
+            TextBlock count = (TextBlock)sender;
+            int index = Convert.ToInt32(count.Uid);
+            Music DB = new Music();
+            int tracked = DB.Tracked_Concerts.Where(x=>x.ID_Concert == index).Count();
+            count.Text = "Количество отметок " + tracked.ToString();
+        }
+
+        private void DateTill(object sender, RoutedEventArgs e)
+        {
+            TextBlock id = (TextBlock)sender;
+            int index = Convert.ToInt32(id.Uid);
+            Music DB = new Music();
+            DateTime date = (DateTime)DB.Concerts.Where(x=>x.ID_Concert==index).Select(x=>x.Date).First();
+            DateTime today = DateTime.Now;
+            TimeSpan diff = date.Subtract(today);
+            id.Text = "Дней до концерта "+diff.Days.ToString();
+        }
+
         public void Back(object sender, EventArgs e)
         {
             MainFrame.mframe.Navigate(new AdminPage());

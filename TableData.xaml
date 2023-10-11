@@ -39,10 +39,30 @@
         <ListView BorderThickness="0" Background="#1DB954" Name="ConcertData" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel HorizontalAlignment="Center" ></StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"></StackPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{DynamicResource BorderInput}" BorderThickness="1" Padding="5">
+                        <Grid Height="350" Width="350" >
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"></TextBlock>
+                                <TextBlock Text="{Binding Places.Place}"></TextBlock>
+                                <TextBlock Text="{Binding Discription}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock Text="{Binding Date, StringFormat={}dd.MM.yyyy}"></TextBlock>
+                                <TextBlock Text="{Binding Places.Place}"></TextBlock>
+                                <TextBlock Uid="{Binding Places.ID_City}" Loaded="FindCity"></TextBlock>
+                                <TextBlock Text="{Binding StringFormat=Минимальная цена {0:#} рублей, Path=Lowest_Price}"></TextBlock>
+                                <TextBlock Text="{Binding StringFormat=Максимальная цена {0:#} рублей, Path=Highest_Price}"></TextBlock>
+                                <TextBlock Uid="{Binding ID_Concert}" Loaded="CountTracked"></TextBlock>
+                                <TextBlock Uid="{Binding ID_Concert}" Loaded="DateTill"></TextBlock>
+                                <Image Width="150" Height="150" Source="Doggie.jpg"></Image>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10">
             <Border Style="{DynamicResource BorderDefault}" Width="90" Height="20">
