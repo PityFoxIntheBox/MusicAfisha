@@ -44,14 +44,13 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{DynamicResource BorderInput}" BorderThickness="1" Padding="5">
+                    <Border Style="{DynamicResource BorderInput}" BorderThickness="1" Padding="5" Background="{Binding TimeConcert}">
                         <Grid Height="350" Width="350" >
                             <StackPanel>
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"></TextBlock>
-                                <TextBlock Text="{Binding Places.Place}"></TextBlock>
-                                <TextBlock Text="{Binding Discription}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock Text="{Binding CheckDisc}" TextWrapping="Wrap"></TextBlock>
                                 <TextBlock Text="{Binding Date, StringFormat={}dd.MM.yyyy}"></TextBlock>
-                                <TextBlock Text="{Binding Places.Place}"></TextBlock>
+                                <TextBlock Text="{Binding Place}"></TextBlock>
                                 <TextBlock Uid="{Binding Places.ID_City}" Loaded="FindCity"></TextBlock>
                                 <TextBlock Text="{Binding StringFormat=Минимальная цена {0:#} рублей, Path=Lowest_Price}"></TextBlock>
                                 <TextBlock Text="{Binding StringFormat=Максимальная цена {0:#} рублей, Path=Highest_Price}"></TextBlock>
