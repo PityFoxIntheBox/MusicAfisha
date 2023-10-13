@@ -134,7 +134,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Tracked_C__ID_Co__6A30C649">
-          <End Role="Concerts" Type="Self.Concerts" Multiplicity="0..1" />
+          <End Role="Concerts" Type="Self.Concerts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tracked_Concerts" Type="Self.Tracked_Concerts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Concerts">
