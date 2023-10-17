@@ -34,7 +34,7 @@ namespace MusicSmth
 
         private void Reg_Click(object sender, RoutedEventArgs e)
         {
-            if(EmptyCheck(Surname.Text,Name.Text,Patronymic.Text,BirthDate.Text))
+            if(!EmptyCheck(Surname.Text,Name.Text,Patronymic.Text,BirthDate.Text))
             {
                 MessageBox.Show("Нужно заполнить поля ФИО и даты рождения, иначе не работает");
                 return;

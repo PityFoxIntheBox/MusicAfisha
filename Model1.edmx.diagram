@@ -19,7 +19,21 @@
         <AssociationConnector Association="Model.FK__Bands__ID_Genre__68487DD7" />
         <AssociationConnector Association="Model.FK__Concerts__ID_Ban__66603565" />
         <AssociationConnector Association="Model.FK__Places__ID_City__693CA210" />
-        <AssociationConnector Association="Model.FK__Concerts__ID_Pla__6754599E" />
+        <AssociationConnector Association="Model.FK__Concerts__ID_Pla__6754599E" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="4.7171802834228167" PointY="11.490143229166666" />
+          <ConnectorPoint PointX="4.7171802834228167" PointY="11.871018642900719" />
+          <ConnectorPoint PointX="5.2977228024106715" PointY="11.871018642900719" />
+          <ConnectorPoint PointX="5.2977228024106715" PointY="11.573119133548605" />
+          <ConnectorPoint PointX="5.9592304414500186" PointY="11.573119133548605" />
+          <ConnectorPoint PointX="5.9592304414500186" PointY="10.408213076081875" />
+          <ConnectorPoint PointX="6.9138249790657946" PointY="10.408213076081875" />
+          <ConnectorPoint PointX="6.9138249790657946" PointY="10.26431841355666" />
+          <ConnectorPoint PointX="7.244131248294253" PointY="10.26431841355666" />
+          <ConnectorPoint PointX="7.244131248294253" PointY="10.009568761369531" />
+          <ConnectorPoint PointX="7.7044238819171378" PointY="10.009568761369531" />
+          <ConnectorPoint PointX="7.7044238819171378" PointY="9.8840950520833335" />
+        </AssociationConnector>
         <AssociationConnector Association="Model.FK__Tracked_C__ID_Co__6A30C649" />
         <AssociationConnector Association="Model.FK__Tracked_C__ID_Us__6B24EA82" />
       </Diagram>
