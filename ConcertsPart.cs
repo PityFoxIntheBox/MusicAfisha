@@ -15,7 +15,7 @@ namespace MusicSmth
             get
             {
                 DateTime today = DateTime.Now;
-                TimeSpan diff = (DateTime)Date - today; 
+                TimeSpan diff = (DateTime)Date - today;
                 if(diff.Days >= 200)
                 {
                     return new SolidColorBrush(Color.FromRgb(234, 126, 173));

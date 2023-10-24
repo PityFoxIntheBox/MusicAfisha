@@ -23,22 +23,8 @@ namespace MusicSmth
         public UsersData()
         {
             InitializeComponent();
-            using (Music DB = new Music())
-            {
-                List<Users> u = DB.Users.ToList();
-                foreach (Users us in u)
-                {
-                    if (us.Gender == 1)
-                    {
-                        us.Genders.Gender = "Мужской";
-                    }
-                    else
-                    {
-                        us.Genders.Gender = "Женский";
-                    }
-                }
-                Data.ItemsSource = u;
-            }
+            Music DB = new Music();
+            Data.ItemsSource = DB.Users.ToList();
         }
         private void SortAZ(object sender, RoutedEventArgs e)
         {
