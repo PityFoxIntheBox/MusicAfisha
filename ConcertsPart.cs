@@ -18,15 +18,15 @@ namespace MusicSmth
                 TimeSpan diff = (DateTime)Date - today; 
                 if(diff.Days >= 200)
                 {
-                    return Brushes.DarkViolet;
+                    return new SolidColorBrush(Color.FromRgb(234, 126, 173));
                 }
                 else if(diff.Days < 200 && diff.Days>=100)
                 {
-                    return Brushes.BlueViolet;
+                    return new SolidColorBrush(Color.FromRgb(234, 86, 151));
                 }
                 else if (diff.Days < 100)
                 {
-                    return Brushes.Violet;
+                    return new SolidColorBrush(Color.FromRgb(214, 33, 112));
                 }
                 else
                 {

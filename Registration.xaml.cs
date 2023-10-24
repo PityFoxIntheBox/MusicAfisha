@@ -48,7 +48,7 @@ namespace MusicSmth
 
             string CurPass = Pass.Password;
 
-            if(PassCheck(CurPass)==false) 
+            if(PassCheck(CurPass)==false)
             {
                 MessageBox.Show("В пароле должно быть: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец. символа (нижнее подчёркивание). Общая длина пароля не менее 8 символов");
                 return;
@@ -64,7 +64,7 @@ namespace MusicSmth
             {
                 gen = 1;
             }
-            else if(Female.IsChecked == true) 
+            else if(Female.IsChecked == true)
             {
                 gen = 2;
             }
@@ -97,7 +97,7 @@ namespace MusicSmth
             {
                 return true;
             }
-            else 
+            else
             { 
                 return false; 
             }
@@ -116,6 +116,7 @@ namespace MusicSmth
                 return true;
             }
         }
+
         public bool EmptyCheck(string Sur, string Nam, string Pat, string BirthDate)
         {
             if(Sur == null || Nam == null || Pat == null || BirthDate == null)
