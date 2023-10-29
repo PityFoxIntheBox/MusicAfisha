@@ -36,10 +36,10 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView BorderThickness="0" Background="#1DB954" Name="ConcertData" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView BorderThickness="0" Background="#1DB954" Name="ConcertData" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"></StackPanel>
+                    <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -57,6 +57,14 @@
                                 <TextBlock Uid="{Binding ID_Concert}" Loaded="CountTracked"></TextBlock>
                                 <TextBlock Uid="{Binding ID_Concert}" Loaded="DateTill"></TextBlock>
                                 <Image Width="150" Height="150" Source="Doggie.jpg"></Image>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                                    <Border Background="Black" CornerRadius="10" Width="100" Height="30">
+                                        <Button Uid="{Binding ID_Concert}" Click="Edit" Height="23" Name="Edit" Foreground="White" Background="#0000" BorderBrush="#0000" Template="{DynamicResource ButtonTemplate1}">Редактировать</Button>
+                                    </Border>
+                                    <Border Margin="5,0,0,0" Background="Black" CornerRadius="10" Width="100" Height="30">
+                                        <Button Uid="{Binding ID_Concert}" Click="Delete" Height="23" Name="Del" Foreground="White" Background="#0000" BorderBrush="#0000" Template="{DynamicResource ButtonTemplate1}">Удалить</Button>
+                                    </Border>
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -66,6 +74,11 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10">
             <Border Style="{DynamicResource BorderDefault}" Width="90" Height="20">
                 <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="Back">Назад</Button>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
+            <Border Style="{DynamicResource BorderDefault}" Width="130" Height="20">
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="Add">Добавить концерт</Button>
             </Border>
         </StackPanel>
     </Grid>

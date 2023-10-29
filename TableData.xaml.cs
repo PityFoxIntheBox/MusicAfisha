@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,35 @@ namespace MusicSmth
         public void Back(object sender, EventArgs e)
         {
             MainFrame.mframe.Navigate(new AdminPage());
+        }
+        public void Add(object sender, EventArgs e)
+        {
+            MainFrame.mframe.Navigate(new AddConcert());
+        }
+        public void Edit(object sender, EventArgs e)
+        {
+            Button but = (Button)sender;
+            int index = Convert.ToInt32(but.Uid);
+            MainFrame.mframe.Navigate(new AddConcert(index));
+        }
+        public void Delete(object sender, EventArgs e)
+        {
+            Music DB = new Music();
+            Button butt = (Button)sender;
+            int index = Convert.ToInt32(butt.Uid);
+            Concerts concert = DB.Concerts.Where(x=>x.ID_Concert == index).FirstOrDefault();
+            switch (MessageBox.Show("Отменить концерт?", "concert", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                case MessageBoxResult.Yes:
+                    DB.Concerts.Remove(concert);
+                    MessageBox.Show("Концерта больше нет");
+                    DB.SaveChanges();
+                    MainFrame.mframe.Navigate(new TableData());
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Ну нет так нет");
+                    break;
+            }
         }
     }
 }

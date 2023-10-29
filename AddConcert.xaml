@@ -7,8 +7,91 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddConcert">
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="#1DB954">
-        
+        <Image Source="Doggie.jpg" Stretch="Fill" Opacity="0.1"></Image>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="20" HorizontalAlignment="Center">Название</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <TextBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Name" Background="#0000" BorderBrush="#0000" Height="25"></TextBox>
+            </Border>
+            <TextBlock FontSize="20" HorizontalAlignment="Center">Исполнитель</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <ComboBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Band" Background="#0000" BorderBrush="#0000" Height="25"></ComboBox>
+            </Border>
+            <TextBlock FontSize="20" HorizontalAlignment="Center">Описание</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black" Width="350">
+                <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Disc" Background="#0000" BorderBrush="#0000" Height="75"></TextBox>
+            </Border>
+            <TextBlock FontSize="20"  HorizontalAlignment="Center">Дата концерта</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <DatePicker VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="DateConc" Background="#0000" BorderBrush="#0000" Height="25"></DatePicker>
+            </Border>
+            <TextBlock FontSize="20" HorizontalAlignment="Center">Место</TextBlock>
+            <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                <ComboBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Place" Background="#0000" BorderBrush="#0000" Height="25"></ComboBox>
+            </Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="20" HorizontalAlignment="Center">Самая низкая цена</TextBlock>
+                    <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                        <TextBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="LowPrice" Background="#0000" BorderBrush="#0000" Height="25"></TextBox>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                    <TextBlock FontSize="20" HorizontalAlignment="Center">Самая высокая цена</TextBlock>
+                    <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
+                        <TextBox VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="HighPrice" Background="#0000" BorderBrush="#0000" Height="25"></TextBox>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+            <Border Margin="0,20,0,0" Background="Black" CornerRadius="10" Width="150" Height="30">
+                <Button Click="Add" Height="23" Name="AddConc" Foreground="White" Background="#0000" BorderBrush="#0000">ДОБАВИТЬ</Button>
+            </Border>
+        </StackPanel>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Background="Black" CornerRadius="10" Width="70" Height="25">
+            <Button Click="Back" Height="23" Name="BackButton" Foreground="White" Background="#0000" BorderBrush="#0000">Назад</Button>
+        </Border>
     </Grid>
 </Page>
