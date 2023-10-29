@@ -67,6 +67,7 @@ namespace MusicSmth
             if(!flag)
             {
                 DB.Concerts.Add(concert);
+                DB.SaveChanges();
             }
             else
             {
