@@ -172,11 +172,11 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="150">
             <TextBlock FontSize="20"  HorizontalAlignment="Center">Логин</TextBlock>
             <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
-                <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Login" Background="#0000" BorderBrush="#0000" Height="25"></TextBox>
+                <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Login" Background="#0000" BorderBrush="#0000" Height="25">admin</TextBox>
             </Border>
             <TextBlock FontSize="20" HorizontalAlignment="Center">Пароль</TextBlock>
             <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black">
-                <PasswordBox Style="{DynamicResource PasswordBoxStyle1}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Pass" Background="#0000" BorderBrush="#0000" Height="25"/>
+                <PasswordBox Password="admin" Style="{DynamicResource PasswordBoxStyle1}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="1" Name="Pass" Background="#0000" BorderBrush="#0000" Height="25"/>
             </Border>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,95">

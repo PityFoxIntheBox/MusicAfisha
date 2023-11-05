@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,13 @@ namespace MusicSmth
             InitializeComponent();
             Music DB = new Music();
             ConcertData.ItemsSource = DB.Concerts.ToList();
-            
+            List<Cities> cit = DB.Cities.ToList();
+            CityFilter.Items.Add("Все города");
+            foreach(Cities i in cit)
+            {
+                CityFilter.Items.Add(i.City);
+            }
+            CityFilter.SelectedIndex = 0;
         }
 
         public void FindCity(object sender,  RoutedEventArgs e)
@@ -91,6 +98,48 @@ namespace MusicSmth
                     MessageBox.Show("Ну нет так нет");
                     break;
             }
+        }
+
+        public void Filter()
+        {
+            Music DB = new Music();
+            List<Concerts> ConcFilter = new List<Concerts>();
+            if (CityFilter.SelectedIndex != 0)
+            {
+                List<Places> pl = DB.Places.ToList();
+                int index = Convert.ToInt32(pl.Where(x => x.ID_City == CityFilter.SelectedIndex).Select(x => x.ID_Place).FirstOrDefault());
+                ConcFilter = DB.Concerts.Where(x => x.ID_Place == index).ToList();
+            }
+            else
+            {
+                ConcFilter = DB.Concerts.ToList();
+            }
+            if(InThisYear.IsChecked == true)
+            {
+                int year = DateTime.Now.Year;
+                DateTime end = new DateTime(year, 12, 31);
+                ConcFilter = ConcFilter.Where(x => x.Date <= end).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(Search.Text)) 
+            {
+                ConcFilter = ConcFilter.Where(x => x.Name.ToLower().Contains(Search.Text.ToLower())).ToList();
+            }
+            ConcertData.ItemsSource = ConcFilter;
+        }
+
+        private void CityChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void SearchChange(object sender, TextChangedEventArgs e)
+        {
+            Filter();
         }
     }
 }

@@ -46,17 +46,17 @@
 После этого нужно открыть файл с расширением **sln**. 
 Далее нажать на кнопку *Пуск* на верхней панели или клавишу *F5* на клавиатуре.
 
-*Также стоит упомянуть что возможно для коррктной работы потребуется поменять строку подключения в файле App.config*
+*Также стоит упомянуть что возможно для корректной работы потребуется поменять строку подключения в файле App.config*
 
 	<connectionStrings>
 	<add name="Music" connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sql;initial catalog=43П-МДК0101-Ермолин;persist security info=True;user id=43П;password=444444;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
 	</connectionStrings>
 
-*Изменить на data source=ngknn.ru*
+*Изменить data source=sql на data source=ngknn.ru*
 	
 	data source=sql
 
 ### Авторы
 
-*Я*
+*Я*</br>
 Ссылка на этот же проект на gogs - [Gogs](http://gogs.ngknn.ru:3000/FoxInBox/ConcertAfisha)
