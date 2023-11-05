@@ -202,12 +202,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ent.png" />
+    <None Include="Resources\login.gif" />
+    <None Include="Resources\swap.gif" />
+    <None Include="Resources\удобно.jpeg" />
     <Resource Include="Doggie.jpg" />
+    <Resource Include="Logo.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
