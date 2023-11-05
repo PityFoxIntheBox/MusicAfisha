@@ -26,6 +26,7 @@ namespace MusicSmth
         {
             InitializeComponent();
             Music DB = new Music();
+            List<string> s = new List<string>() { "Без фильтров", "По дате", "По цене" };
             ConcertData.ItemsSource = DB.Concerts.ToList();
             List<Cities> cit = DB.Cities.ToList();
             CityFilter.Items.Add("Все города");
@@ -33,7 +34,10 @@ namespace MusicSmth
             {
                 CityFilter.Items.Add(i.City);
             }
+            Sort.ItemsSource = s;
+            Sort.SelectedItem = "Без фильтров";
             CityFilter.SelectedIndex = 0;
+            
         }
 
         public void FindCity(object sender,  RoutedEventArgs e)
@@ -124,6 +128,23 @@ namespace MusicSmth
             {
                 ConcFilter = ConcFilter.Where(x => x.Name.ToLower().Contains(Search.Text.ToLower())).ToList();
             }
+
+            if(Sort.SelectedItem.ToString()=="По дате" && Up.IsChecked == true)
+            {
+                ConcFilter = ConcFilter.OrderBy(x => x.Date).ToList();
+            }
+            if(Sort.SelectedItem.ToString() == "По дате" && Down.IsChecked == true)
+            {
+                ConcFilter = ConcFilter.OrderByDescending(x => x.Date).ToList();
+            }
+            if(Sort.SelectedItem.ToString()=="По цене" && Up.IsChecked==true)
+            {
+                ConcFilter = ConcFilter.OrderBy(x=>(x.Lowest_Price + x.Highest_Price) / 2).ToList();
+            }
+            if (Sort.SelectedItem.ToString() == "По цене" && Down.IsChecked == true)
+            {
+                ConcFilter = ConcFilter.OrderByDescending(x => (x.Lowest_Price + x.Highest_Price) / 2).ToList();
+            }
             ConcertData.ItemsSource = ConcFilter;
         }
 
@@ -138,6 +159,21 @@ namespace MusicSmth
         }
 
         private void SearchChange(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void SortChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void Up_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void Down_Checked(object sender, RoutedEventArgs e)
         {
             Filter();
         }

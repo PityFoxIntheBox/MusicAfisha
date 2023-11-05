@@ -37,12 +37,20 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <ComboBox Margin="0,10,0,0" Name="CityFilter" Width="100" SelectionChanged="CityChanged">
-                
-            </ComboBox>
-            <CheckBox Click="CheckedChanged" Name="InThisYear" VerticalContentAlignment="Center" Margin="10,10,0,0">В этом году</CheckBox>
-            <TextBox Name="Search" Margin="10,10,0,0" Width="100" TextChanged="SearchChange"></TextBox>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <ComboBox  Name="CityFilter" Width="150" SelectionChanged="CityChanged">
+                </ComboBox>
+                <CheckBox Click="CheckedChanged" Name="InThisYear" VerticalContentAlignment="Center" Margin="10,10,0,0">В этом году</CheckBox>
+                <TextBox Name="Search" Margin="10,10,0,0" Width="100" TextChanged="SearchChange"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="50,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox  Name="Sort" SelectionChanged="SortChanged" Width="150">
+                    
+                </ComboBox>
+                <RadioButton Checked="Up_Checked" Name="Up" GroupName="SortUpDown" Margin="10,0,0,0"  VerticalContentAlignment="Center">По возрастснию</RadioButton>
+                <RadioButton Checked="Down_Checked" Name="Down" GroupName="SortUpDown" Margin="10,0,0,0"  VerticalContentAlignment="Center">По убыванию</RadioButton>
+            </StackPanel>
         </StackPanel>
         <ListView Grid.Row="1" BorderThickness="0" Background="#1DB954" Name="ConcertData" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListView.ItemsPanel>
