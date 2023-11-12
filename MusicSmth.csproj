@@ -97,6 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Photos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Places.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -29,6 +29,7 @@ namespace MusicSmth
         public Nullable<int> Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<int> Role { get; set; }
+        public Nullable<int> ID_Photo { get; set; }
     
         public virtual Genders Genders { get; set; }
         public virtual Roles Roles { get; set; }
