@@ -48,6 +48,14 @@
           <Property Name="ID_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Genre" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="ID_Photo" />
+          </Key>
+          <Property Name="ID_Photo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Places">
           <Key>
             <PropertyRef Name="ID_Place" />
@@ -84,6 +92,7 @@
           <Property Name="Gender" Type="int" />
           <Property Name="BirthDate" Type="date" />
           <Property Name="Role" Type="int" />
+          <Property Name="ID_Photo" Type="int" />
         </EntityType>
         <Association Name="FK__Bands__ID_Genre__68487DD7">
           <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
@@ -171,6 +180,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_Photos">
+          <End Role="Photos" Type="Self.Photos" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="ID_Photo" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ID_Photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -189,6 +210,7 @@
           <EntitySet Name="Concerts" EntityType="Self.Concerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tracked_Concerts" EntityType="Self.Tracked_Concerts" Schema="dbo" store:Type="Tables" />
@@ -219,6 +241,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Users_Genders" Association="Self.FK_Users_Genders">
             <End Role="Genders" EntitySet="Genders" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Photos" Association="Self.FK_Users_Photos">
+            <End Role="Photos" EntitySet="Photos" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
@@ -262,6 +288,8 @@
           <NavigationProperty Name="Genders" Relationship="Self.FK_Users_Genders" FromRole="Users" ToRole="Genders" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="Tracked_Concerts" Relationship="Model.FK__Tracked_C__ID_Us__6B24EA82" FromRole="Users" ToRole="Tracked_Concerts" />
+          <Property Name="ID_Photo" Type="Int32" />
+          <NavigationProperty Name="Photos" Relationship="Model.FK_Users_Photos" FromRole="Users" ToRole="Photos" />
         </EntityType>
         <Association Name="FK_Users_Genders">
           <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
@@ -328,6 +356,11 @@
           <AssociationSet Name="FK__Tracked_C__ID_Us__6B24EA82" Association="Model.FK__Tracked_C__ID_Us__6B24EA82">
             <End Role="Users" EntitySet="Users" />
             <End Role="Tracked_Concerts" EntitySet="Tracked_Concerts" />
+          </AssociationSet>
+          <EntitySet Name="Photos" EntityType="Model.Photos" />
+          <AssociationSet Name="FK_Users_Photos" Association="Model.FK_Users_Photos">
+            <End Role="Photos" EntitySet="Photos" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bands">
@@ -465,6 +498,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="ID_Photo" />
+          </Key>
+          <Property Name="ID_Photo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Users_Photos" FromRole="Photos" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Users_Photos">
+          <End Type="Model.Photos" Role="Photos" Multiplicity="0..1" />
+          <End Type="Model.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="ID_Photo" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ID_Photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -490,6 +544,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID_Photo" ColumnName="ID_Photo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -557,6 +612,15 @@
                 <ScalarProperty Name="ID_Concert" ColumnName="ID_Concert" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="ID_Track" ColumnName="ID_Track" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="Model.Photos">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Photo" ColumnName="ID_Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

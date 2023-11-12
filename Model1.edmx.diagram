@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c2f80dcb1d54de7a3b4ab2b27429a8c" Name="Diagram1" ZoomLevel="117">
+      <Diagram DiagramId="2c2f80dcb1d54de7a3b4ab2b27429a8c" Name="Diagram1" ZoomLevel="122">
         <EntityTypeShape EntityType="Model.Genders" Width="1.5" PointX="2.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Roles" Width="1.5" PointX="2.5" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="6.625" PointY="2.625" IsExpanded="true" />
@@ -36,6 +36,8 @@
         </AssociationConnector>
         <AssociationConnector Association="Model.FK__Tracked_C__ID_Co__6A30C649" />
         <AssociationConnector Association="Model.FK__Tracked_C__ID_Us__6B24EA82" />
+        <EntityTypeShape EntityType="Model.Photos" Width="1.5" PointX="10.75" PointY="3.125" />
+        <AssociationConnector Association="Model.FK_Users_Photos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
