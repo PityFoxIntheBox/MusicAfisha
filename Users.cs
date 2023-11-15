@@ -35,5 +35,6 @@ namespace MusicSmth
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tracked_Concerts> Tracked_Concerts { get; set; }
+        public virtual Photos Photos { get; set; }
     }
 }

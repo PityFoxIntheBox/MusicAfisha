@@ -26,7 +26,8 @@ namespace MusicSmth
         Music DB = new Music();
         Concerts concert = new Concerts();
         bool flag = false;
-        public AddConcert()
+        int id;
+        public AddConcert(int UsId)
         {
             InitializeComponent();
             //Шаблоны отказались меняться :'(
@@ -34,8 +35,9 @@ namespace MusicSmth
             Band.DisplayMemberPath = "Band";
             Place.ItemsSource=DB.Places.ToList();
             Place.DisplayMemberPath = "Place";
+            id = UsId;
         }
-        public AddConcert(int index)
+        public AddConcert(int index, int UsId)
         {
             flag = true;
             InitializeComponent();
@@ -54,6 +56,7 @@ namespace MusicSmth
             Place.SelectedItem = place;
             LowPrice.Text = concert.Lowest_Price.ToString();
             HighPrice.Text = concert.Highest_Price.ToString();
+            id = UsId;
         }
         public void Add(object sender, RoutedEventArgs e)
         {
@@ -77,7 +80,7 @@ namespace MusicSmth
         }
         public void Back(object sender, RoutedEventArgs e)
         {
-            MainFrame.mframe.Navigate(new TableData());
+            MainFrame.mframe.Navigate(new TableData(id));
         }
     }
 }

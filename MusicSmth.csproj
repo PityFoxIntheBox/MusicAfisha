@@ -103,11 +103,20 @@
     <Compile Include="Places.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="RedAutnInfoWin.xaml.cs">
+      <DependentUpon>RedAutnInfoWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RedUserInfoWin.xaml.cs">
+      <DependentUpon>RedUserInfoWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPhoto.xaml.cs">
+      <DependentUpon>SelectPhoto.xaml</DependentUpon>
     </Compile>
     <Compile Include="TableData.xaml.cs">
       <DependentUpon>TableData.xaml</DependentUpon>
@@ -148,7 +157,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RedAutnInfoWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RedUserInfoWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,10 +232,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\nophoto.jpeg" />
     <None Include="Resources\ent.png" />
     <None Include="Resources\login.gif" />
     <None Include="Resources\swap.gif" />
-    <None Include="Resources\удобно.jpeg" />
+    <Resource Include="Resources\удобно.jpeg" />
     <Resource Include="Doggie.jpg" />
     <Resource Include="Logo.png" />
     <Content Include="Model1.Context.tt">

@@ -46,10 +46,10 @@ namespace MusicSmth
                     switch (user.Role)
                     {
                         case 1:
-                            MainFrame.mframe.Navigate(new AdminPage());
+                            MainFrame.mframe.Navigate(new AdminPage(user.Id));
                             break;
                         case 2:
-                            MainFrame.mframe.Navigate(new UserPage());
+                            MainFrame.mframe.Navigate(new UserPage(user.Id));
                             break;
                         default:
                             MessageBox.Show("Вас не существует");

@@ -22,7 +22,8 @@ namespace MusicSmth
     /// </summary>
     public partial class TableData : Page
     {
-        public TableData()
+        int id;
+        public TableData(int UsId)
         {
             InitializeComponent();
             Music DB = new Music();
@@ -37,7 +38,7 @@ namespace MusicSmth
             Sort.ItemsSource = s;
             Sort.SelectedItem = "Без фильтров";
             CityFilter.SelectedIndex = 0;
-            
+            id = UsId;
         }
 
         public void FindCity(object sender,  RoutedEventArgs e)
@@ -72,17 +73,17 @@ namespace MusicSmth
 
         public void Back(object sender, EventArgs e)
         {
-            MainFrame.mframe.Navigate(new AdminPage());
+            MainFrame.mframe.Navigate(new AdminPage(id));
         }
         public void Add(object sender, EventArgs e)
         {
-            MainFrame.mframe.Navigate(new AddConcert());
+            MainFrame.mframe.Navigate(new AddConcert(id));
         }
         public void Edit(object sender, EventArgs e)
         {
             Button but = (Button)sender;
             int index = Convert.ToInt32(but.Uid);
-            MainFrame.mframe.Navigate(new AddConcert(index));
+            MainFrame.mframe.Navigate(new AddConcert(index, id));
         }
         public void Delete(object sender, EventArgs e)
         {
@@ -96,7 +97,7 @@ namespace MusicSmth
                     DB.Concerts.Remove(concert);
                     MessageBox.Show("Концерта больше нет");
                     DB.SaveChanges();
-                    MainFrame.mframe.Navigate(new TableData());
+                    MainFrame.mframe.Navigate(new TableData(id));
                     break;
                 case MessageBoxResult.No:
                     MessageBox.Show("Ну нет так нет");

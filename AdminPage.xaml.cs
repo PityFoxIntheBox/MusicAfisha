@@ -20,19 +20,27 @@ namespace MusicSmth
     /// </summary>
     public partial class AdminPage : Page
     {
-        public AdminPage()
+        Users user = new Users();
+        Music muse = new Music();
+        public AdminPage(int UsId)
         {
             InitializeComponent();
+            user = muse.Users.Where(x=>x.Id == UsId).FirstOrDefault();
         }
 
         private void DataView(object sender, RoutedEventArgs e)
         {
-            MainFrame.mframe.Navigate(new UsersData());
+            MainFrame.mframe.Navigate(new UsersData(user.Id));
         }
 
         private void TableView(object sender, RoutedEventArgs e)
         {
-            MainFrame.mframe.Navigate(new TableData());
+            MainFrame.mframe.Navigate(new TableData(user.Id));
+        }
+
+        private void GoUserPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.mframe.Navigate(new UserPage(user.Id));
         }
     }
 }

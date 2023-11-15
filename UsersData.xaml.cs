@@ -20,11 +20,13 @@ namespace MusicSmth
     /// </summary>
     public partial class UsersData : Page
     {
-        public UsersData()
+        int id;
+        public UsersData(int UsId)
         {
             InitializeComponent();
             Music DB = new Music();
             Data.ItemsSource = DB.Users.ToList();
+            id = UsId;
         }
         private void SortAZ(object sender, RoutedEventArgs e)
         {
@@ -124,7 +126,7 @@ namespace MusicSmth
         }
         private void Back(object sender, RoutedEventArgs e)
         {
-            MainFrame.mframe.Navigate(new AdminPage());
+            MainFrame.mframe.Navigate(new AdminPage(id));
         }
     }
 }

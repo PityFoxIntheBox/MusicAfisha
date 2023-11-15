@@ -7,8 +7,64 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserPage">
+    <Page.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid Background="#1DB954">
-        <TextBlock HorizontalAlignment="Center">ПОЛЬЗОВАТЕЛЬ</TextBlock>
+        <Image Source="Doggie.jpg" Stretch="Fill" Opacity="0.1"></Image>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Border Style="{DynamicResource BorderInput}" Height="210" Width="210">
+                    <Image Height="200" Width="200" Name="Photo" Source="\Resources\nophoto.jpeg"/>
+                </Border>
+                <Border Style="{DynamicResource BorderDefault}" Width="200" Margin="0,10,0,0" Height="20">
+                    <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="UploadPhoto">Загрузить аватар</Button>
+                </Border>
+                <Border Style="{DynamicResource BorderDefault}" Width="200" Margin="0,10,0,0" Height="20">
+                    <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="UploadPhotos">Загрузить фотографии</Button>
+                </Border>
+                <Border Style="{DynamicResource BorderDefault}" Width="200" Margin="0,10,0,0" Height="20">
+                    <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="SelectPh">Выбрать из галереи</Button>
+                </Border>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="10,0,0,0" Orientation="Vertical">
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Фамилия"/>
+                <TextBlock Name="Srname"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Имя"/>
+                <TextBlock Name="Nam"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Отчество"/>
+                <TextBlock Name="Patr"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Пол"/>
+                <TextBlock Name="Gen"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Дата рождения"/>
+                <TextBlock Name="Birthd"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Логин"/>
+                <TextBlock Name="Log"/>
+                <TextBlock FontWeight="Bold" FontSize="16" Text="Пароль"/>
+                <TextBlock Name="Pass"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30">
+            <Border Style="{DynamicResource BorderDefault}" Width="200" Margin="0,0,0,0" Height="20">
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="RedUserInfo">Редактировать информацию</Button>
+            </Border>
+            <Border Style="{DynamicResource BorderDefault}" Width="300" Margin="0,10,0,0" Height="20">
+                <Button Template="{DynamicResource ButtonTemplate1}" Style="{DynamicResource ButtonDefault}" Click="RedAuthInfo">Редактировать аутентификационные данные</Button>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>
